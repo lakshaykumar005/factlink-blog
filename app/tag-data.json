@@ -1,9 +1,8 @@
 {
-  "technology": 1,
-  "factlink": 4,
-  "defi": 3,
-  "blockchain": 2,
   "prediction": 1,
   "market": 2,
-  "oracle": 1
+  "factlink": 3,
+  "defi": 2,
+  "oracle": 1,
+  "blockchain": 1
 }
