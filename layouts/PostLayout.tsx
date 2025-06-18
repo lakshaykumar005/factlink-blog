@@ -9,6 +9,9 @@ import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import Card from '@/components/Card'
+import { allCoreContent } from 'pliny/utils/contentlayer'
+import { allBlogs } from 'contentlayer/generated'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -102,14 +105,8 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 {` • `}
                 <Link href={editUrl(filePath)}>View on GitHub</Link>
               </div>
-              {siteMetadata.comments && (
-                <div
-                  className="pt-6 pb-6 text-center text-gray-700 dark:text-gray-300"
-                  id="comment"
-                >
-                  <Comments slug={slug} />
-                </div>
-              )}
+              {/* SUGGESTED ARTICLES SECTION */}
+              <SuggestedArticles currentSlug={slug} currentTags={tags} />
             </div>
             <footer>
               <div className="divide-gray-200 text-sm leading-5 font-medium xl:col-start-1 xl:row-start-2 xl:divide-y dark:divide-gray-700">
@@ -164,5 +161,35 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
         </div>
       </article>
     </SectionContainer>
+  )
+}
+
+function SuggestedArticles({ currentSlug, currentTags }) {
+  // Get all posts except the current one
+  const posts = allCoreContent(allBlogs).filter((post) => post.slug !== currentSlug)
+  // Find posts with at least one matching tag
+  const suggestions = posts.filter((post) =>
+    post.tags?.some((tag) => currentTags.includes(tag))
+  ).slice(0, 3)
+  if (suggestions.length === 0) return null
+  return (
+    <div className="pt-10">
+      {/* <hr className="mb-8 border-t border-gray-200 dark:border-gray-700" /> */}
+      <h2 className="mb-6 text-2xl font-bold text-gradient-factlink-custom text-center">Suggested Articles</h2>
+      <div className="flex gap-6 overflow-x-auto no-scrollbar pb-4 px-2">
+        {suggestions.map((post) => (
+          <div className="min-w-[260px] max-w-[320px] flex-shrink-0" key={post.slug}>
+            <Card
+              title={post.title}
+              description={post.summary}
+              imgSrc={post.images?.[0] || '/static/images/topic.png'}
+              href={`/blog/${post.slug}`}
+              compact
+            />
+          </div>
+        ))}
+      </div>
+      <hr className="mt-8 border-t border-gray-200 dark:border-gray-700" />
+    </div>
   )
 }

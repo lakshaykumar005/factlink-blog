@@ -7,7 +7,8 @@
 /* Core theme configuration */
 @theme {
   /* Font families */
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+  --font-sans:
+    var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
   /* Colors */
@@ -115,6 +116,50 @@
       color: var(--color-gray-100);
     }
   }
+
+  .bg-factlink-gradient {
+    background: linear-gradient(90deg, #b6e0fe 0%, #aee9e1 50%, #a78bfa 100%);
+  }
+  .bg-factlink-gradient-dark {
+    background: linear-gradient(90deg, #3b4252 0%, #2e3440 50%, #6d28d9 100%);
+  }
+
+  .text-gradient-factlink {
+    background: linear-gradient(90deg, #b6e0fe 0%, #aee9e1 50%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-factlink-soft {
+    background: radial-gradient(
+      ellipse at 50% 30%,
+      #d1f3ff 0%,
+      #b6e0fe 40%,
+      #aee9e1 80%,
+      #e0e7ff 100%
+    );
+  }
+  @media (prefers-color-scheme: dark) {
+    .bg-factlink-soft {
+      background: none !important;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .dark\:bg-none {
+      background-image: none !important;
+    }
+  }
+
+  .text-gradient-factlink-custom {
+    background: linear-gradient(90deg, #a78bfa 0%, #60a5fa 50%, #34d399 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
 }
 
 .task-list-item::before {
@@ -172,4 +217,9 @@ input:-webkit-autofill:focus {
 .linkicon {
   display: inline-block;
   vertical-align: middle;
+}
+
+html.dark body {
+  background-image: none !important;
+  background-color: #000 !important;
 }
