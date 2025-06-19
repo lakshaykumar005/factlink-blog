@@ -1,12 +1,12 @@
 {
-  "cross-chain": 1,
-  "defi": 5,
-  "factlink": 7,
-  "blockchain": 5,
-  "market": 2,
-  "governance": 1,
-  "oracle": 1,
-  "prediction": 1,
   "security": 1,
-  "technology": 1
+  "factlink": 7,
+  "defi": 5,
+  "blockchain": 5,
+  "cross-chain": 1,
+  "governance": 1,
+  "technology": 1,
+  "prediction": 1,
+  "market": 2,
+  "oracle": 1
 }

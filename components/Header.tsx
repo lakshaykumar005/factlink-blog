@@ -7,6 +7,7 @@ import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
 
 const Header = () => {
   let headerClass =
@@ -45,7 +46,6 @@ const Header = () => {
         </div>
         <SearchButton />
         <ThemeSwitch />
-        <MobileNav />
       </div>
     </header>
   )
@@ -54,6 +54,14 @@ const Header = () => {
 // ThemeLogo component for switching logo based on theme using next-themes
 const ThemeLogo = () => {
   const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+  if (!mounted) {
+    // Render nothing on server to avoid hydration mismatch
+    return null
+  }
   return (
     <Image
       src={
