@@ -130,23 +130,13 @@ function ActualListLayoutWithTags({
   return (
     <>
       <div className="relative">
-        {/* Floating Search Bar */}
-        <div className="fixed top-8 left-1/2 z-50 w-full max-w-xl -translate-x-1/2 rounded-2xl bg-white/90 p-4 shadow-2xl dark:bg-gray-900/90">
-          <input
-            type="text"
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            placeholder="Search by title, summary, or tag..."
-            className="w-full rounded-xl border border-pink-300 bg-white px-6 py-3 text-lg text-pink-700 shadow focus:border-pink-500 focus:ring-2 focus:ring-pink-200 dark:bg-gray-900 dark:text-pink-200"
-          />
-        </div>
+        {/* Removed Floating Search Bar */}
         <div className="pt-28 pb-6 text-center">
           <h1 className="text-gradient-factlink-custom mb-8 text-4xl font-extrabold md:text-6xl">
             {title}
           </h1>
           {pagination && pagination.totalPages > 1 && (
             <div className="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row">
-              <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
               <div className="flex items-center gap-2">
                 <label
                   htmlFor="pageSize"
@@ -222,6 +212,12 @@ function ActualListLayoutWithTags({
             )
           })}
         </div>
+        {/* Move Pagination to the bottom of the page */}
+        {pagination && pagination.totalPages > 1 && !searchValue && (
+          <div className="mt-12 flex justify-center">
+            <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
+          </div>
+        )}
       </div>
     </>
   )

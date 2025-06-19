@@ -2,10 +2,12 @@ import Link from '@/components/Link'
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center transition-colors duration-500">
-      <div className="flex flex-col items-center max-w-lg w-full">
-        <h1 className="text-7xl md:text-9xl font-extrabold text-gray-900 dark:text-gray-100 mb-4">404</h1>
-        <p className="mb-2 text-2xl font-bold text-gray-900 dark:text-gray-100 text-center">
+    <div className="flex min-h-screen w-full items-center justify-center transition-colors duration-500">
+      <div className="flex w-full max-w-lg flex-col items-center">
+        <h1 className="mb-4 text-7xl font-extrabold text-gray-900 md:text-9xl dark:text-gray-100">
+          404
+        </h1>
+        <p className="mb-2 text-center text-2xl font-bold text-gray-900 dark:text-gray-100">
           Sorry, we couldn't find this page.
         </p>
         <p className="mb-8 text-center text-gray-700 dark:text-gray-300">

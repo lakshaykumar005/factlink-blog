@@ -185,7 +185,7 @@ function SuggestedArticles({ currentSlug, currentTags }) {
               title={post.title}
               description={post.summary}
               imgSrc={post.images?.[0] || '/static/images/topic.png'}
-              href={`/blog/${post.slug}`}
+              href={`/${post.slug}`}
               compact
             />
           </div>

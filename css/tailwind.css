@@ -223,3 +223,7 @@ html.dark body {
   background-image: none !important;
   background-color: #000 !important;
 }
+
+.kbar-esc {
+  display: none !important;
+}

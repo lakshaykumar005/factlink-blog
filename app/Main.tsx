@@ -99,11 +99,11 @@ export default function Home({ posts }) {
                     </div>
                   </div>
                   <h2 className="mb-2 text-2xl font-bold text-black md:text-3xl dark:text-white">
-                    <Link href={`/blog/${slug}`}>{title}</Link>
+                    <Link href={`/${slug}`}>{title}</Link>
                   </h2>
                   <p className="mb-4 text-gray-700 dark:text-gray-300">{summary}</p>
                   <Link
-                    href={`/blog/${slug}`}
+                    href={`/${slug}`}
                     className="inline-block font-semibold text-pink-500 transition-colors hover:underline"
                     aria-label={`Read more: "${title}"`}
                   >
