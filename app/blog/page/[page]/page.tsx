@@ -12,19 +12,19 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default async function Page(props: { params: Promise<{ page: string }> }) {
-  const params = await props.params
+export default async function Page({ params, searchParams }: { params: { page: string }, searchParams: { pageSize?: string } }) {
   const posts = allCoreContent(sortPosts(allBlogs))
+  const pageSize = parseInt(searchParams?.pageSize || '5')
   const pageNumber = parseInt(params.page as string)
-  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE)
+  const totalPages = Math.ceil(posts.length / pageSize)
 
   // Return 404 for invalid page numbers or empty pages
   if (pageNumber <= 0 || pageNumber > totalPages || isNaN(pageNumber)) {
     return notFound()
   }
   const initialDisplayPosts = posts.slice(
-    POSTS_PER_PAGE * (pageNumber - 1),
-    POSTS_PER_PAGE * pageNumber
+    pageSize * (pageNumber - 1),
+    pageSize * pageNumber
   )
   const pagination = {
     currentPage: pageNumber,

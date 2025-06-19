@@ -178,7 +178,10 @@ function SuggestedArticles({ currentSlug, currentTags }) {
       <h2 className="mb-6 text-2xl font-bold text-gradient-factlink-custom text-center">Suggested Articles</h2>
       <div className="flex gap-6 overflow-x-auto no-scrollbar pb-4 px-2">
         {suggestions.map((post) => (
-          <div className="min-w-[260px] max-w-[320px] flex-shrink-0" key={post.slug}>
+          <div
+            className="w-[320px] h-[340px] flex-shrink-0 flex items-stretch"
+            key={post.slug}
+          >
             <Card
               title={post.title}
               description={post.summary}

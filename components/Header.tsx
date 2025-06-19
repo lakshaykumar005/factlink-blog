@@ -1,10 +1,12 @@
+"use client";
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
-import Logo from '@/data/logo.svg'
+import Image from './Image'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
+import { useTheme } from 'next-themes'
 
 const Header = () => {
   let headerClass =
@@ -16,14 +18,12 @@ const Header = () => {
   return (
     <header className={headerClass}>
       <Link href="/" aria-label={siteMetadata.headerTitle}>
-        <div className="flex items-center justify-between">
-          <div className="mr-3">
-            <Logo />
-          </div>
+        <div className="flex items-center gap-2">
+          <ThemeLogo />
           {typeof siteMetadata.headerTitle === 'string' ? (
-            <div className="hidden h-6 text-2xl font-semibold text-gradient-factlink-custom sm:block">
+            <span className="text-2xl font-semibold text-gradient-factlink-custom">
               {siteMetadata.headerTitle}
-            </div>
+            </span>
           ) : (
             siteMetadata.headerTitle
           )}
@@ -49,6 +49,21 @@ const Header = () => {
       </div>
     </header>
   )
+}
+
+// ThemeLogo component for switching logo based on theme using next-themes
+const ThemeLogo = () => {
+  const { resolvedTheme } = useTheme();
+  return (
+    <Image
+      src={resolvedTheme === 'dark' ? '/static/images/factlinkwhite.png' : '/static/images/factlinkdark.png'}
+      alt="Factlink Logo"
+      width={32}
+      height={32}
+      className="rounded-full"
+      priority
+    />
+  );
 }
 
 export default Header

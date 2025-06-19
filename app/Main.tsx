@@ -19,12 +19,12 @@ export default function Home({ posts }) {
       <section className="flex flex-col items-center justify-center px-4 py-16 text-center">
         <h1 className="text-gradient-factlink-custom mb-6 text-5xl font-extrabold text-black md:text-7xl dark:text-white">
           Factlink Insights
-        </h1>
+          </h1>
         <p className="mb-8 max-w-2xl text-lg text-gray-700 md:text-xl dark:text-gray-200">
           Explore the latest research, updates, and thought leadership on Factlink, Polymarket, and
           the future of decentralized finance. Dive into articles about blockchain technology,
           prediction markets, oracles, and more.
-        </p>
+          </p>
       </section>
 
       {/* Blog List */}
@@ -48,21 +48,21 @@ export default function Home({ posts }) {
                         >
                           {tag}
                         </span>
-                      ))}
-                    </div>
-                  </div>
+                            ))}
+                          </div>
+                        </div>
                   <h2 className="mb-2 text-2xl font-bold text-black md:text-3xl dark:text-white">
                     <Link href={`/blog/${slug}`}>{title}</Link>
                   </h2>
                   <p className="mb-4 text-gray-700 dark:text-gray-300">{summary}</p>
-                  <Link
-                    href={`/blog/${slug}`}
+                        <Link
+                          href={`/blog/${slug}`}
                     className="inline-block font-semibold text-pink-500 transition-colors hover:underline"
-                    aria-label={`Read more: "${title}"`}
-                  >
-                    Read more &rarr;
-                  </Link>
-                </div>
+                          aria-label={`Read more: "${title}"`}
+                        >
+                          Read more &rarr;
+                        </Link>
+                      </div>
               </li>
             )
           })}
@@ -87,8 +87,8 @@ export default function Home({ posts }) {
             >
               Next
             </button>
-          </div>
-        )}
+        </div>
+      )}
       </section>
 
       {siteMetadata.newsletter?.provider && (

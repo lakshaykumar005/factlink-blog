@@ -7,7 +7,7 @@ const siteMetadata = {
     'Insights, updates, and research on Factlink, Polymarket, and blockchain technology.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://factlink.org',
+  siteUrl: 'https://factlink.in',
   siteRepo: 'https://github.com/FactlinkProtocol',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
