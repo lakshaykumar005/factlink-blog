@@ -12,10 +12,10 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default async function Page({ params, searchParams }: { params: { page: string }, searchParams: { pageSize?: string } }) {
+export default function Page({ params, searchParams }: { params?: { page?: string }, searchParams?: { pageSize?: string } }) {
   const posts = allCoreContent(sortPosts(allBlogs))
   const pageSize = parseInt(searchParams?.pageSize || '5')
-  const pageNumber = parseInt(params.page as string)
+  const pageNumber = parseInt(params?.page || '1')
   const totalPages = Math.ceil(posts.length / pageSize)
 
   // Return 404 for invalid page numbers or empty pages
