@@ -1,5 +1,3 @@
-const headerNavLinks = [
-  { href: '/', title: 'Home' },
-]
+const headerNavLinks = [{ href: '/', title: 'Home' }]
 
 export default headerNavLinks

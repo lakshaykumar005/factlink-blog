@@ -40,13 +40,18 @@ export default function Home({ posts }) {
       </section>
 
       {/* Blogs per page dropdown below hero description */}
-      <div className="flex items-center justify-center gap-2 mb-8">
-        <label htmlFor="pageSize" className="text-gradient-factlink-custom text-lg font-bold">Blogs per page:</label>
+      <div className="mb-8 flex items-center justify-center gap-2">
+        <label htmlFor="pageSize" className="text-gradient-factlink-custom text-lg font-bold">
+          Blogs per page:
+        </label>
         <div className="relative">
           <select
             id="pageSize"
             value={pageSize}
-            onChange={e => { setPageSize(Number(e.target.value)); setPage(1); }}
+            onChange={(e) => {
+              setPageSize(Number(e.target.value))
+              setPage(1)
+            }}
             className="appearance-none rounded-full border border-pink-400 bg-white/80 px-6 py-2 pr-10 text-base font-semibold text-pink-600 shadow transition-colors focus:border-pink-600 focus:ring-2 focus:ring-pink-200 dark:bg-gray-900/80 dark:text-pink-300"
           >
             {[5, 10, 20, 50].map((size) => (
@@ -117,7 +122,7 @@ export default function Home({ posts }) {
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className={`rounded-full px-4 py-2 font-bold transition-colors ${page === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-pink-500 text-white hover:bg-pink-600'}`}
+                className={`rounded-full px-4 py-2 font-bold transition-colors ${page === 1 ? 'cursor-not-allowed bg-gray-200 text-gray-400' : 'bg-pink-500 text-white hover:bg-pink-600'}`}
               >
                 &larr; Prev
               </button>
@@ -130,28 +135,40 @@ export default function Home({ posts }) {
                   if (page <= 4) {
                     pages.push(1, 2, 3, 4, 5, '...', totalPages)
                   } else if (page >= totalPages - 3) {
-                    pages.push(1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages)
+                    pages.push(
+                      1,
+                      '...',
+                      totalPages - 4,
+                      totalPages - 3,
+                      totalPages - 2,
+                      totalPages - 1,
+                      totalPages
+                    )
                   } else {
                     pages.push(1, '...', page - 1, page, page + 1, '...', totalPages)
                   }
                 }
                 return pages.map((num, idx) =>
-                  num === '...'
-                    ? <span key={`ellipsis-${idx}`} className="px-2 text-xl text-gray-400">...</span>
-                    : <button
-                        key={`page-${num}`}
-                        onClick={() => setPage(Number(num))}
-                        className={`rounded-full px-4 py-2 font-bold transition-colors ${num === page ? 'bg-pink-600 text-white' : 'bg-pink-200 text-pink-600 hover:bg-pink-400'}`}
-                        aria-current={num === page ? 'page' : undefined}
-                      >
-                        {num}
-                      </button>
+                  num === '...' ? (
+                    <span key={`ellipsis-${idx}`} className="px-2 text-xl text-gray-400">
+                      ...
+                    </span>
+                  ) : (
+                    <button
+                      key={`page-${num}`}
+                      onClick={() => setPage(Number(num))}
+                      className={`rounded-full px-4 py-2 font-bold transition-colors ${num === page ? 'bg-pink-600 text-white' : 'bg-pink-200 text-pink-600 hover:bg-pink-400'}`}
+                      aria-current={num === page ? 'page' : undefined}
+                    >
+                      {num}
+                    </button>
+                  )
                 )
               })()}
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
-                className={`rounded-full px-4 py-2 font-bold transition-colors ${page === totalPages ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-pink-500 text-white hover:bg-pink-600'}`}
+                className={`rounded-full px-4 py-2 font-bold transition-colors ${page === totalPages ? 'cursor-not-allowed bg-gray-200 text-gray-400' : 'bg-pink-500 text-white hover:bg-pink-600'}`}
               >
                 Next &rarr;
               </button>
@@ -165,7 +182,7 @@ export default function Home({ posts }) {
           <CustomNewsletterForm />
         </div>
       )}
-      <div className="flex justify-center mt-8 mb-16">
+      <div className="mt-8 mb-16 flex justify-center">
         <BackToTopButton />
       </div>
     </>

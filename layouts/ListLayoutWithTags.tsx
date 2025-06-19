@@ -23,8 +23,7 @@ interface ListLayoutProps {
 
 function Pagination({ totalPages, currentPage }) {
   const pathname = usePathname()
-  const basePath = pathname
-    .replace(/^\/|\/page\/\d+\/?$|\/$/g, '')
+  const basePath = pathname.replace(/^\/|\/page\/\d+\/?$|\/$/g, '')
 
   // Helper to generate page numbers with ellipsis
   function getPageNumbers(): (string | number)[] {
@@ -35,7 +34,15 @@ function Pagination({ totalPages, currentPage }) {
       if (currentPage <= 4) {
         pages.push(1, 2, 3, 4, 5, '...', totalPages)
       } else if (currentPage >= totalPages - 3) {
-        pages.push(1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages)
+        pages.push(
+          1,
+          '...',
+          totalPages - 4,
+          totalPages - 3,
+          totalPages - 2,
+          totalPages - 1,
+          totalPages
+        )
       } else {
         pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages)
       }
@@ -49,7 +56,7 @@ function Pagination({ totalPages, currentPage }) {
       {/* Prev Button */}
       <Link
         href={`/${basePath}${currentPage - 1 === 1 ? '' : `/page/${currentPage - 1}`}`}
-        className={`rounded-full px-4 py-2 font-bold transition-colors ${currentPage === 1 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-pink-500 text-white hover:bg-pink-600'}`}
+        className={`rounded-full px-4 py-2 font-bold transition-colors ${currentPage === 1 ? 'cursor-not-allowed bg-gray-200 text-gray-400' : 'bg-pink-500 text-white hover:bg-pink-600'}`}
         aria-disabled={currentPage === 1}
         tabIndex={currentPage === 1 ? -1 : 0}
       >
@@ -57,21 +64,25 @@ function Pagination({ totalPages, currentPage }) {
       </Link>
       {/* Page Numbers */}
       {pageNumbers.map((num, idx) =>
-        num === '...'
-          ? <span key={`ellipsis-${idx}`} className="px-2 text-xl text-gray-400">...</span>
-          : <Link
-              key={`page-${num}`}
-              href={`/${basePath}${num === 1 ? '' : `/page/${num}`}`}
-              className={`rounded-full px-4 py-2 font-bold transition-colors ${num === currentPage ? 'bg-pink-600 text-white' : 'bg-pink-200 text-pink-600 hover:bg-pink-400'}`}
-              aria-current={num === currentPage ? 'page' : undefined}
-            >
-              {num}
-            </Link>
+        num === '...' ? (
+          <span key={`ellipsis-${idx}`} className="px-2 text-xl text-gray-400">
+            ...
+          </span>
+        ) : (
+          <Link
+            key={`page-${num}`}
+            href={`/${basePath}${num === 1 ? '' : `/page/${num}`}`}
+            className={`rounded-full px-4 py-2 font-bold transition-colors ${num === currentPage ? 'bg-pink-600 text-white' : 'bg-pink-200 text-pink-600 hover:bg-pink-400'}`}
+            aria-current={num === currentPage ? 'page' : undefined}
+          >
+            {num}
+          </Link>
+        )
       )}
       {/* Next Button */}
       <Link
         href={`/${basePath}/page/${currentPage + 1}`}
-        className={`rounded-full px-4 py-2 font-bold transition-colors ${currentPage === totalPages ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-pink-500 text-white hover:bg-pink-600'}`}
+        className={`rounded-full px-4 py-2 font-bold transition-colors ${currentPage === totalPages ? 'cursor-not-allowed bg-gray-200 text-gray-400' : 'bg-pink-500 text-white hover:bg-pink-600'}`}
         aria-disabled={currentPage === totalPages}
         tabIndex={currentPage === totalPages ? -1 : 0}
       >
@@ -113,13 +124,14 @@ function ActualListLayoutWithTags({
     const searchContent = post.title + post.summary + (post.tags?.join(' ') || '')
     return searchContent.toLowerCase().includes(searchValue.toLowerCase())
   })
-  const displayPosts = initialDisplayPosts.length > 0 && !searchValue ? initialDisplayPosts : filteredPosts
+  const displayPosts =
+    initialDisplayPosts.length > 0 && !searchValue ? initialDisplayPosts : filteredPosts
 
   return (
     <>
       <div className="relative">
         {/* Floating Search Bar */}
-        <div className="fixed left-1/2 top-8 z-50 w-full max-w-xl -translate-x-1/2 rounded-2xl bg-white/90 p-4 shadow-2xl dark:bg-gray-900/90">
+        <div className="fixed top-8 left-1/2 z-50 w-full max-w-xl -translate-x-1/2 rounded-2xl bg-white/90 p-4 shadow-2xl dark:bg-gray-900/90">
           <input
             type="text"
             value={searchValue}
@@ -136,7 +148,12 @@ function ActualListLayoutWithTags({
             <div className="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row">
               <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
               <div className="flex items-center gap-2">
-                <label htmlFor="pageSize" className="text-gradient-factlink-custom text-lg font-bold">Blogs per page:</label>
+                <label
+                  htmlFor="pageSize"
+                  className="text-gradient-factlink-custom text-lg font-bold"
+                >
+                  Blogs per page:
+                </label>
                 <div className="relative">
                   <select
                     id="pageSize"
