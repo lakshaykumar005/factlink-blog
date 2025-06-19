@@ -1,10 +1,13 @@
-"use client"
+'use client'
 import { useRef, useState } from 'react'
 
 export default function CustomNewsletterForm({
   title = 'Subscribe to the newsletter',
   apiUrl = '/api/newsletter',
-}: { title?: string; apiUrl?: string }) {
+}: {
+  title?: string
+  apiUrl?: string
+}) {
   const inputEl = useRef<HTMLInputElement>(null)
   const [error, setError] = useState(false)
   const [message, setMessage] = useState('')
@@ -42,7 +45,7 @@ export default function CustomNewsletterForm({
             <span className="sr-only">Email address</span>
             <input
               autoComplete="email"
-              className="focus:ring-primary-600 w-72 rounded-md px-4 focus:border-transparent focus:outline-none focus:ring-2 dark:bg-black"
+              className="focus:ring-primary-600 w-72 rounded-md px-4 focus:border-transparent focus:ring-2 focus:outline-none dark:bg-black"
               id="email-input"
               name="email"
               placeholder={subscribed ? "You're subscribed! 🎉" : 'Enter your email'}
@@ -55,7 +58,7 @@ export default function CustomNewsletterForm({
         </div>
         <div className="mt-2 flex w-full rounded-md shadow-sm sm:mt-0 sm:ml-3">
           <button
-            className={`bg-primary-500 w-full rounded-md py-2 px-4 font-medium text-white sm:py-0 ${subscribed ? 'cursor-default bg-green-600' : 'hover:bg-primary-700 dark:hover:bg-primary-400'} focus:ring-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:ring-offset-black`}
+            className={`bg-primary-500 w-full rounded-md px-4 py-2 font-medium text-white sm:py-0 ${subscribed ? 'cursor-default bg-green-600' : 'hover:bg-primary-700 dark:hover:bg-primary-400'} focus:ring-primary-600 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:ring-offset-black`}
             type="submit"
             disabled={subscribed}
           >
@@ -64,11 +67,13 @@ export default function CustomNewsletterForm({
         </div>
       </form>
       {error && (
-        <div className="w-72 pt-2 text-sm text-red-500 dark:text-red-400 sm:w-96">{message}</div>
+        <div className="w-72 pt-2 text-sm text-red-500 sm:w-96 dark:text-red-400">{message}</div>
       )}
       {showNotified && (
-        <div className="w-72 pt-2 text-sm text-green-600 dark:text-green-400 sm:w-96">You will be notified</div>
+        <div className="w-72 pt-2 text-sm text-green-600 sm:w-96 dark:text-green-400">
+          You will be notified
+        </div>
       )}
     </div>
   )
-} 
+}

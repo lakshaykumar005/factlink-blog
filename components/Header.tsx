@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import Image from './Image'
@@ -21,7 +21,7 @@ const Header = () => {
         <div className="flex items-center gap-2">
           <ThemeLogo />
           {typeof siteMetadata.headerTitle === 'string' ? (
-            <span className="text-2xl font-semibold text-gradient-factlink-custom">
+            <span className="text-gradient-factlink-custom text-2xl font-semibold">
               {siteMetadata.headerTitle}
             </span>
           ) : (
@@ -53,17 +53,21 @@ const Header = () => {
 
 // ThemeLogo component for switching logo based on theme using next-themes
 const ThemeLogo = () => {
-  const { resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme()
   return (
     <Image
-      src={resolvedTheme === 'dark' ? '/static/images/factlinkwhite.png' : '/static/images/factlinkdark.png'}
+      src={
+        resolvedTheme === 'dark'
+          ? '/static/images/factlinkwhite.png'
+          : '/static/images/factlinkdark.png'
+      }
       alt="Factlink Logo"
       width={32}
       height={32}
       className="rounded-full"
       priority
     />
-  );
+  )
 }
 
 export default Header

@@ -9,7 +9,9 @@ export default function Projects() {
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="mb-8 text-4xl font-extrabold text-gradient-factlink-custom md:text-6xl">Projects</h1>
+          <h1 className="text-gradient-factlink-custom mb-8 text-4xl font-extrabold md:text-6xl">
+            Projects
+          </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             Showcase your projects with a hero image (16 x 9)
           </p>

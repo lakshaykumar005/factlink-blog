@@ -12,7 +12,8 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default function Page({ params, searchParams }: { params?: { page?: string }, searchParams?: { pageSize?: string } }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function Page({ params, searchParams }: any) {
   const posts = allCoreContent(sortPosts(allBlogs))
   const pageSize = parseInt(searchParams?.pageSize || '5')
   const pageNumber = parseInt(params?.page || '1')
@@ -22,10 +23,7 @@ export default function Page({ params, searchParams }: { params?: { page?: strin
   if (pageNumber <= 0 || pageNumber > totalPages || isNaN(pageNumber)) {
     return notFound()
   }
-  const initialDisplayPosts = posts.slice(
-    pageSize * (pageNumber - 1),
-    pageSize * pageNumber
-  )
+  const initialDisplayPosts = posts.slice(pageSize * (pageNumber - 1), pageSize * pageNumber)
   const pagination = {
     currentPage: pageNumber,
     totalPages: totalPages,

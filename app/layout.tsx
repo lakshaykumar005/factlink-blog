@@ -77,7 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
       <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico" />
-      <body className="bg-gradient-to-br from-gray-50 via-blue-50 to-teal-100 dark:bg-black pl-[calc(100vw-100%)] text-black antialiased dark:text-white">
+      <body className="bg-gradient-to-br from-gray-50 via-blue-50 to-teal-100 pl-[calc(100vw-100%)] text-black antialiased dark:bg-black dark:text-white">
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>

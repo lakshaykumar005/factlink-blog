@@ -168,20 +168,19 @@ function SuggestedArticles({ currentSlug, currentTags }) {
   // Get all posts except the current one
   const posts = allCoreContent(allBlogs).filter((post) => post.slug !== currentSlug)
   // Find posts with at least one matching tag
-  const suggestions = posts.filter((post) =>
-    post.tags?.some((tag) => currentTags.includes(tag))
-  ).slice(0, 3)
+  const suggestions = posts
+    .filter((post) => post.tags?.some((tag) => currentTags.includes(tag)))
+    .slice(0, 3)
   if (suggestions.length === 0) return null
   return (
     <div className="pt-10">
       {/* <hr className="mb-8 border-t border-gray-200 dark:border-gray-700" /> */}
-      <h2 className="mb-6 text-2xl font-bold text-gradient-factlink-custom text-center">Suggested Articles</h2>
-      <div className="flex gap-6 overflow-x-auto no-scrollbar pb-4 px-2">
+      <h2 className="text-gradient-factlink-custom mb-6 text-center text-2xl font-bold">
+        Suggested Articles
+      </h2>
+      <div className="no-scrollbar flex gap-6 overflow-x-auto px-2 pb-4">
         {suggestions.map((post) => (
-          <div
-            className="w-[320px] h-[340px] flex-shrink-0 flex items-stretch"
-            key={post.slug}
-          >
+          <div className="flex h-[340px] w-[320px] flex-shrink-0 items-stretch" key={post.slug}>
             <Card
               title={post.title}
               description={post.summary}

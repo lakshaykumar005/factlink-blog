@@ -7,7 +7,8 @@ const POSTS_PER_PAGE = 5
 
 export const metadata = genPageMetadata({ title: 'All Articles' })
 
-export default function BlogPage({ searchParams }: { searchParams?: { pageSize?: string } }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function BlogPage({ searchParams }: any) {
   const posts = allCoreContent(sortPosts(allBlogs))
   const pageSize = parseInt(searchParams?.pageSize || '5')
   const pageNumber = 1

@@ -29,7 +29,9 @@ const Card = ({ title, description, imgSrc, href, compact = false }) => (
           />
         ))}
       <div className={`${compact ? 'p-3' : 'p-6'}`}>
-        <h2 className={`${compact ? 'mb-2 text-lg font-bold' : 'mb-3 text-2xl leading-8 font-bold tracking-tight'} text-black dark:text-white`}>
+        <h2
+          className={`${compact ? 'mb-2 text-lg font-bold' : 'mb-3 text-2xl leading-8 font-bold tracking-tight'} text-black dark:text-white`}
+        >
           {href ? (
             <Link href={href} aria-label={`Link to ${title}`}>
               {title}
@@ -38,7 +40,11 @@ const Card = ({ title, description, imgSrc, href, compact = false }) => (
             title
           )}
         </h2>
-        <p className={`prose mb-2 max-w-none text-gray-500 dark:text-gray-400 ${compact ? 'text-sm' : ''}`}>{description}</p>
+        <p
+          className={`prose mb-2 max-w-none text-gray-500 dark:text-gray-400 ${compact ? 'text-sm' : ''}`}
+        >
+          {description}
+        </p>
         {href && (
           <Link
             href={href}
