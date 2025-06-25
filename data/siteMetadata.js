@@ -9,8 +9,8 @@ const siteMetadata = {
   theme: 'system', // system, dark or light
   siteUrl: 'https://factlink-blog.vercel.app',
   siteRepo: 'https://github.com/FactlinkProtocol',
-  siteLogo: `${process.env.BASE_PATH || ''}/static/images/factlinkproject.png`,
-  socialBanner: `${process.env.BASE_PATH || ''}/static/images/factlinkproject.png`,
+  siteLogo: '/static/images/factlinkproject.png',
+  socialBanner: '/static/images/factlinkproject.png',
   mastodon: '',
   email: 'contact@factlink.org',
   github: 'https://github.com/FactlinkProtocol',

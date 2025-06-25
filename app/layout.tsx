@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     description: siteMetadata.description,
     url: './',
     siteName: siteMetadata.title,
-    images: [`${siteMetadata.siteUrl}/public/static/images/factlinkproject.png`],
+    images: [`${siteMetadata.siteUrl}/static/images/factlinkproject.png`],
     locale: 'en_US',
     type: 'website',
   },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   twitter: {
     title: siteMetadata.title,
     card: 'summary_large_image',
-    images: [`${siteMetadata.siteUrl}/public/static/images/factlinkproject.png`],
+    images: [`${siteMetadata.siteUrl}/static/images/factlinkproject.png`],
   },
 }
 
@@ -66,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property="og:url" content="https://factlink-blog.vercel.app" />
         <meta
           property="og:image"
-          content="https://factlink-blog.vercel.app/public/static/images/factlinkproject.png"
+          content="https://factlink-blog.vercel.app/static/images/factlinkproject.png"
         />
         <meta property="og:image:alt" content="Factlink Project" />
         <meta property="og:image:type" content="image/png" />
@@ -82,17 +82,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="twitter:url" content="https://factlink-blog.vercel.app" />
         <meta
           name="twitter:image"
-          content="https://factlink-blog.vercel.app/public/static/images/factlinkproject.png"
+          content="https://factlink-blog.vercel.app/static/images/factlinkproject.png"
         />
         {/* Telegram */}
         <meta
           name="telegram:image"
-          content="https://factlink-blog.vercel.app/public/static/images/factlinkproject.png"
+          content="https://factlink-blog.vercel.app/static/images/factlinkproject.png"
         />
         {/* Discord */}
         <meta
           name="discord:image"
-          content="https://factlink-blog.vercel.app/public/static/images/factlinkproject.png"
+          content="https://factlink-blog.vercel.app/static/images/factlinkproject.png"
         />
         {/* Instagram (uses Open Graph) */}
         {/* Pinterest (uses Open Graph) */}
