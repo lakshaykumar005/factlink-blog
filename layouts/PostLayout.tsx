@@ -12,6 +12,7 @@ import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import Card from '@/components/Card'
 import { allCoreContent } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
+import BackToTopBlogButton from '@/components/BackToTopBlogButton'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -33,14 +34,29 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags } = content
+  const { filePath, path, slug, date, title, tags, images } = content
   const basePath = path.split('/')[0]
 
   return (
     <SectionContainer>
       <ScrollTopAndComment />
       <article>
-        <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
+        <div>
+          {/* Featured Image Card at the top */}
+          {images?.[0] && (
+            <div className="mb-12 flex flex-col items-stretch justify-center gap-8 md:flex-row">
+              <div className="flex flex-1 items-center justify-center">
+                <Image
+                  src={images[0]}
+                  alt={title}
+                  width={400}
+                  height={220}
+                  className="mx-auto h-[220px] w-[400px] rounded-2xl border border-gray-200 bg-white object-cover object-center shadow-xl dark:border-gray-800 dark:bg-gray-900"
+                  priority
+                />
+              </div>
+            </div>
+          )}
           <header className="pt-6 xl:pb-6">
             <div className="space-y-1 text-center">
               <dl className="space-y-10">
@@ -55,109 +71,31 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </dl>
               <div>
                 <PageTitle>{title}</PageTitle>
+                {tags && (
+                  <div className="mt-4 mb-2 flex flex-wrap justify-center gap-2">
+                    {tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-pink-500 px-3 py-1 text-xs font-semibold text-white transition hover:scale-105 hover:bg-pink-400"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </header>
-          <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0 dark:divide-gray-700">
-            <dl className="pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
-              <dt className="sr-only">Authors</dt>
-              <dd>
-                <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-y-8 xl:space-x-0">
-                  {authorDetails.map((author) => (
-                    <li className="flex items-center space-x-2" key={author.name}>
-                      {author.avatar && (
-                        <Image
-                          src={author.avatar}
-                          width={38}
-                          height={38}
-                          alt="avatar"
-                          className="h-10 w-10 rounded-full"
-                        />
-                      )}
-                      <dl className="text-sm leading-5 font-medium whitespace-nowrap">
-                        <dt className="sr-only">Name</dt>
-                        <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
-                        <dt className="sr-only">Twitter</dt>
-                        <dd>
-                          {author.twitter && (
-                            <Link
-                              href={author.twitter}
-                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                            >
-                              {author.twitter
-                                .replace('https://twitter.com/', '@')
-                                .replace('https://x.com/', '@')}
-                            </Link>
-                          )}
-                        </dd>
-                      </dl>
-                    </li>
-                  ))}
-                </ul>
-              </dd>
-            </dl>
-            <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
-              <div className="prose dark:prose-invert max-w-none pt-10 pb-8">{children}</div>
-              <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
-                <Link href={discussUrl(path)} rel="nofollow">
-                  Discuss on Twitter
-                </Link>
-                {` • `}
-                <Link href={editUrl(filePath)}>View on GitHub</Link>
-              </div>
-              {/* SUGGESTED ARTICLES SECTION */}
-              <SuggestedArticles currentSlug={slug} currentTags={tags} />
-            </div>
-            <footer>
-              <div className="divide-gray-200 text-sm leading-5 font-medium xl:col-start-1 xl:row-start-2 xl:divide-y dark:divide-gray-700">
-                {tags && (
-                  <div className="py-4 xl:py-8">
-                    <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                      Tags
-                    </h2>
-                    <div className="flex flex-wrap">
-                      {tags.map((tag) => (
-                        <Tag key={tag} text={tag} />
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {(next || prev) && (
-                  <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                    {prev && prev.path && (
-                      <div>
-                        <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                          Previous Article
-                        </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${prev.path}`}>{prev.title}</Link>
-                        </div>
-                      </div>
-                    )}
-                    {next && next.path && (
-                      <div>
-                        <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                          Next Article
-                        </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${next.path}`}>{next.title}</Link>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-              <div className="pt-4 xl:pt-8">
-                <Link
-                  href={`/${basePath}`}
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                  aria-label="Back to the blog"
-                >
-                  &larr; Back to the blog
-                </Link>
-              </div>
-            </footer>
-          </div>
+          <hr className="my-8 border-t border-gray-400 dark:border-gray-700" />
+          <div className="prose dark:prose-invert mx-auto max-w-none pt-10 pb-8">{children}</div>
+        </div>
+        <hr className="my-8 border-t border-gray-400 dark:border-gray-700" />
+        {/* Related Articles Section */}
+        <SuggestedArticles currentSlug={slug} currentTags={tags} />
+        <hr className="my-8 border-t border-gray-400 dark:border-gray-700" />
+        {/* Footer: Back to Top */}
+        <div className="flex justify-center pt-16 pb-8">
+          <BackToTopBlogButton />
         </div>
       </article>
     </SectionContainer>
@@ -174,24 +112,49 @@ function SuggestedArticles({ currentSlug, currentTags }) {
   if (suggestions.length === 0) return null
   return (
     <div className="pt-10">
-      {/* <hr className="mb-8 border-t border-gray-200 dark:border-gray-700" /> */}
-      <h2 className="text-gradient-factlink-custom mb-6 text-center text-2xl font-bold">
-        Suggested Articles
+      <h2 className="text-gradient-factlink-custom mb-8 text-left text-2xl font-bold md:text-center md:text-3xl">
+        Related Articles
       </h2>
-      <div className="no-scrollbar flex gap-6 overflow-x-auto px-2 pb-4">
+      <div className="hide-scrollbar flex flex-row flex-nowrap gap-4 overflow-x-auto px-1 pb-4 sm:gap-8 sm:px-2">
         {suggestions.map((post) => (
-          <div className="flex h-[340px] w-[320px] flex-shrink-0 items-stretch" key={post.slug}>
-            <Card
-              title={post.title}
-              description={post.summary}
-              imgSrc={post.images?.[0] || '/static/images/topic.png'}
-              href={`/${post.slug}`}
-              compact
-            />
+          <div
+            className="mx-auto flex w-[85vw] max-w-xs flex-shrink-0 flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg sm:w-[320px] md:w-[360px] dark:border-gray-700 dark:bg-gray-900"
+            key={post.slug}
+          >
+            <Link href={`/${post.slug}`} className="block h-40 w-full overflow-hidden sm:h-48">
+              <Image
+                src={post.images?.[0] || '/static/images/topic.png'}
+                alt={post.title}
+                width={360}
+                height={180}
+                className="h-40 w-full object-cover object-center transition-transform duration-300 hover:scale-105 sm:h-48"
+              />
+            </Link>
+            <div className="flex flex-1 flex-col p-4 sm:p-6">
+              <div className="mb-2 text-xs font-medium text-gray-400">
+                {post.date &&
+                  new Date(post.date).toLocaleDateString(siteMetadata.locale, {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })}
+                {post.readingTime && <> • {post.readingTime.text}</>}
+              </div>
+              <h3 className="mb-2 text-base font-bold text-black sm:text-lg dark:text-white">
+                <Link
+                  href={`/${post.slug}`}
+                  className="text-black transition-colors hover:text-pink-400 hover:underline dark:text-white"
+                >
+                  {post.title}
+                </Link>
+              </h3>
+              <p className="mb-4 line-clamp-3 text-xs text-black sm:text-sm dark:text-white">
+                {post.summary}
+              </p>
+            </div>
           </div>
         ))}
       </div>
-      <hr className="mt-8 border-t border-gray-200 dark:border-gray-700" />
     </div>
   )
 }

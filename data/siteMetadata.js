@@ -10,7 +10,7 @@ const siteMetadata = {
   siteUrl: 'https://factlink.in',
   siteRepo: 'https://github.com/FactlinkProtocol',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
-  socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
+  socialBanner: `${process.env.BASE_PATH || ''}/static/images/factlinkproject.png`,
   mastodon: '',
   email: 'contact@factlink.org',
   github: 'https://github.com/FactlinkProtocol',
