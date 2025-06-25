@@ -56,16 +56,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang={siteMetadata.language} className="scroll-smooth" suppressHydrationWarning>
       <head>
-        <meta property="og:image" content="https://factlink-blog.vercel.app/static/images/factlinkproject.png" />
+        <meta
+          property="og:image"
+          content="https://factlink-blog.vercel.app/static/images/factlinkproject.png"
+        />
         <meta property="og:image:alt" content="Factlink Project" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Factlink & Polymarket Blog" />
-        <meta property="og:description" content="Insights, updates, and research on Factlink, Polymarket, and blockchain technology." />
+        <meta
+          property="og:description"
+          content="Insights, updates, and research on Factlink, Polymarket, and blockchain technology."
+        />
         <meta property="og:url" content="https://factlink-blog.vercel.app" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://factlink-blog.vercel.app/static/images/factlinkproject.png" />
+        <meta
+          name="twitter:image"
+          content="https://factlink-blog.vercel.app/static/images/factlinkproject.png"
+        />
         <meta name="twitter:title" content="Factlink & Polymarket Blog" />
-        <meta name="twitter:description" content="Insights, updates, and research on Factlink, Polymarket, and blockchain technology." />
+        <meta
+          name="twitter:description"
+          content="Insights, updates, and research on Factlink, Polymarket, and blockchain technology."
+        />
         <meta name="twitter:url" content="https://factlink-blog.vercel.app" />
       </head>
       <link rel="apple-touch-icon" sizes="76x76" href="/static/images/favicon.ico" />
