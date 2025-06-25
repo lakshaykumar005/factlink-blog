@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     description: siteMetadata.description,
     url: './',
     siteName: siteMetadata.title,
-    images: [siteMetadata.socialBanner],
+    images: [`${siteMetadata.siteUrl}/static/images/factlinkproject.png`],
     locale: 'en_US',
     type: 'website',
   },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   twitter: {
     title: siteMetadata.title,
     card: 'summary_large_image',
-    images: [siteMetadata.socialBanner],
+    images: [`${siteMetadata.siteUrl}/static/images/factlinkproject.png`],
   },
 }
 

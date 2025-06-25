@@ -21,23 +21,16 @@ const Header = () => {
       <Link href="/" aria-label={siteMetadata.headerTitle}>
         <div className="flex items-center gap-2">
           <ThemeLogo />
-          {typeof siteMetadata.headerTitle === 'string' ? (
-            <span className="text-gradient-factlink-custom text-2xl font-semibold">
-              {siteMetadata.headerTitle}
-            </span>
-          ) : (
-            siteMetadata.headerTitle
-          )}
         </div>
       </Link>
       {/* Centered Links */}
       <div className="flex flex-1 justify-center">
-        <div className="flex items-center gap-8">
+        <div className="font-satoshi flex items-center gap-8">
           <a
             href="https://docs.factlink.xyz"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-primary-500 dark:hover:text-primary-400 text-lg font-medium text-gray-900 dark:text-gray-100"
+            className="hover:text-primary-500 dark:hover:text-primary-400 font-satoshi text-lg font-medium text-gray-900 dark:text-gray-100"
           >
             Docs
           </a>
@@ -45,7 +38,7 @@ const Header = () => {
             href="https://factlink.xyz"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-primary-500 dark:hover:text-primary-400 text-lg font-medium text-gray-900 dark:text-gray-100"
+            className="hover:text-primary-500 dark:hover:text-primary-400 font-satoshi text-lg font-medium text-gray-900 dark:text-gray-100"
           >
             FactLink
           </a>
@@ -59,7 +52,7 @@ const Header = () => {
               <Link
                 key={link.title}
                 href={link.href}
-                className="hover:text-primary-500 dark:hover:text-primary-400 m-1 font-medium text-gray-900 dark:text-gray-100"
+                className="hover:text-primary-500 dark:hover:text-primary-400 m-1 font-sans font-medium text-gray-900 dark:text-gray-100"
               >
                 {link.title}
               </Link>
@@ -87,13 +80,12 @@ const ThemeLogo = () => {
     <Image
       src={
         resolvedTheme === 'dark'
-          ? '/static/images/factlinkwhite.png'
-          : '/static/images/factlinkdark.png'
+          ? '/static/images/factlinkdark.png'
+          : '/static/images/factlinkwhite.png'
       }
       alt="Factlink Logo"
-      width={32}
-      height={32}
-      className="rounded-full"
+      width={144}
+      height={144}
       priority
     />
   )

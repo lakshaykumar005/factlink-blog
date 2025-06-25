@@ -143,7 +143,7 @@ function SuggestedArticles({ currentSlug, currentTags }) {
               <h3 className="mb-2 text-base font-bold text-black sm:text-lg dark:text-white">
                 <Link
                   href={`/${post.slug}`}
-                  className="text-black transition-colors hover:text-pink-400 hover:underline dark:text-white"
+                  className="text-black transition-colors hover:text-pink-400 dark:text-white"
                 >
                   {post.title}
                 </Link>

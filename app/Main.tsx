@@ -4,7 +4,7 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import CustomNewsletterForm from '@/components/CustomNewsletterForm'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import BackToTopButton from '@/components/BackToTopButton'
 import Image from 'next/image'
 import Card from '@/components/Card'
@@ -15,6 +15,7 @@ export default function Home({ posts }) {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(5)
   const [searchValue, setSearchValue] = useState('')
+  const [showNewsletterModal, setShowNewsletterModal] = useState(false)
   const totalPages = Math.ceil(
     posts.filter((post) => {
       const searchContent = post.title + post.summary + (post.tags?.join(' ') || '')
@@ -30,8 +31,7 @@ export default function Home({ posts }) {
   return (
     <>
       {/* Hero Section */}
-      <hr className="mt-10 mb-8 border-t border-gray-200 dark:border-gray-700" />
-      <h2 className="text-gradient-factlink-custom mb-8 text-left text-3xl font-bold tracking-tight md:text-4xl">
+      <h2 className="text-gradient-factlink-custom mt-20 mb-4 text-left text-3xl font-bold tracking-tight md:text-4xl">
         MOST RECENT ARTICLES
       </h2>
       {/* Horizontal line above Most Recent Articles Section */}
@@ -61,7 +61,7 @@ export default function Home({ posts }) {
               <h3 className="mb-4 text-xl font-bold text-black sm:text-2xl md:text-3xl dark:text-white">
                 <Link
                   href={`/${posts[0].slug}`}
-                  className="transition-colors duration-200 hover:text-pink-400 hover:underline"
+                  className="transition-colors duration-200 hover:text-pink-400"
                 >
                   {posts[0].title}
                 </Link>
@@ -97,13 +97,24 @@ export default function Home({ posts }) {
               <li key={slug} className="">
                 <Link href={`/${slug}`} className="group block">
                   <div className="flex flex-col items-stretch overflow-hidden rounded-2xl border-2 border-gray-200/60 bg-white p-0 shadow-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl md:flex-row dark:border-gray-800 dark:bg-gray-900">
+                    {/* Image Side */}
+                    <div className="flex w-full flex-shrink-0 items-center justify-center overflow-hidden rounded-t-xl p-0 md:ml-6 md:w-1/3 md:rounded-l-xl md:rounded-tr-none">
+                      <Image
+                        src={images?.[0] || '/static/images/topic.png'}
+                        alt={title}
+                        width={320}
+                        height={180}
+                        className="h-[180px] w-full object-cover object-center transition-transform duration-300 group-hover:scale-105 md:h-[180px] md:min-h-[180px]"
+                        priority={false}
+                      />
+                    </div>
                     {/* Content Side */}
                     <div className="flex flex-1 flex-col justify-between p-4 sm:p-8">
                       <div className="mb-2 text-xs font-medium text-gray-500 sm:text-sm dark:text-gray-400">
                         {formatDate(date, siteMetadata.locale)}
                         {readingTime && <> • {readingTime.text}</>}
                       </div>
-                      <h2 className="mb-2 text-lg font-bold text-black transition-colors duration-200 group-hover:text-pink-400 group-hover:underline sm:text-2xl md:text-3xl dark:text-white">
+                      <h2 className="mb-2 text-lg font-bold text-black transition-colors duration-200 group-hover:text-pink-400 sm:text-2xl md:text-3xl dark:text-white">
                         {title}
                       </h2>
                       <p className="mb-4 text-sm text-gray-700 sm:text-base dark:text-gray-300">
@@ -119,20 +130,9 @@ export default function Home({ posts }) {
                           </span>
                         ))}
                       </div>
-                      <span className="inline-block font-semibold text-pink-500 transition-colors duration-200 group-hover:text-pink-400 group-hover:underline">
+                      <span className="inline-block font-semibold text-pink-500 transition-colors duration-200 group-hover:text-pink-400">
                         Read more &rarr;
                       </span>
-                    </div>
-                    {/* Image Side */}
-                    <div className="m-0 flex w-full flex-shrink-0 items-center justify-center overflow-hidden rounded-t-xl p-0 md:w-1/3 md:-translate-x-6">
-                      <Image
-                        src={images?.[0] || '/static/images/topic.png'}
-                        alt={title}
-                        width={320}
-                        height={180}
-                        className="h-[160px] w-full rounded-t-xl rounded-b-none object-cover object-center transition-transform duration-300 group-hover:scale-105 sm:h-[180px] md:h-[180px] md:min-h-[180px]"
-                        priority={false}
-                      />
                     </div>
                   </div>
                 </Link>
@@ -205,7 +205,7 @@ export default function Home({ posts }) {
         <div className="mx-auto mt-8 flex w-full max-w-xs flex-col items-stretch justify-center gap-2 sm:max-w-none sm:flex-row sm:items-center">
           <label
             htmlFor="pageSize"
-            className="text-gradient-factlink-custom mb-2 text-lg font-bold sm:mr-2 sm:mb-0"
+            className="mb-2 text-lg font-bold text-black sm:mr-2 sm:mb-0 dark:text-white"
           >
             Blogs per page:
           </label>
@@ -240,14 +240,34 @@ export default function Home({ posts }) {
         </div>
       </section>
 
-      {siteMetadata.newsletter?.provider && (
-        <div className="flex items-center justify-center pt-8">
-          <CustomNewsletterForm />
-        </div>
-      )}
       <div className="mt-8 mb-16 flex justify-center">
         <BackToTopButton />
       </div>
+
+      {/* Newsletter Subscribe Modal Trigger */}
+      <div className="fixed right-8 bottom-8 z-50">
+        <button
+          onClick={() => setShowNewsletterModal(true)}
+          className="rounded-lg bg-pink-600 px-6 py-3 text-lg font-bold text-white shadow-lg transition-colors hover:bg-pink-700 focus:ring-2 focus:ring-pink-300 focus:outline-none"
+        >
+          Subscribe Now
+        </button>
+      </div>
+      {/* Newsletter Modal */}
+      {showNewsletterModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="relative w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl dark:bg-gray-900">
+            <button
+              className="absolute top-4 right-4 text-2xl text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+              onClick={() => setShowNewsletterModal(false)}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <CustomNewsletterForm title="Get updates straight to your inbox" />
+          </div>
+        </div>
+      )}
     </>
   )
 }
