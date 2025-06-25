@@ -40,14 +40,14 @@ export async function generateMetadata(props: {
   const modifiedAt = new Date(post.lastmod || post.date).toISOString()
   const authors = authorDetails.map((author) => author.name)
   let imageList = [siteMetadata.socialBanner]
-  if (post.images) {
-    imageList = typeof post.images === 'string' ? [post.images] : post.images
+  if (post.images && post.images.length > 0) {
+    imageList = (typeof post.images === 'string' ? [post.images] : post.images).map((img) =>
+      img && img.startsWith('http') ? img : siteMetadata.siteUrl + img
+    )
+  } else {
+    imageList = [siteMetadata.siteUrl + siteMetadata.socialBanner]
   }
-  const ogImages = imageList.map((img) => {
-    return {
-      url: img && img.includes('http') ? img : siteMetadata.siteUrl + img,
-    }
-  })
+  const ogImages = imageList.map((img) => ({ url: img }))
 
   return {
     title: post.title,
