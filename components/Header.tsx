@@ -25,12 +25,12 @@ const Header = () => {
       </Link>
       {/* Centered Links */}
       <div className="flex flex-1 justify-center">
-        <div className="font-satoshi flex items-center gap-8">
+        <div className="flex items-center gap-8 font-satoshi">
           <a
             href="https://docs.factlink.xyz"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-primary-500 dark:hover:text-primary-400 font-satoshi text-lg font-medium text-gray-900 dark:text-gray-100"
+            className="hover:text-primary-500 dark:hover:text-primary-400 text-lg font-medium text-gray-900 dark:text-gray-100 font-satoshi"
           >
             Docs
           </a>
@@ -38,7 +38,7 @@ const Header = () => {
             href="https://factlink.xyz"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-primary-500 dark:hover:text-primary-400 font-satoshi text-lg font-medium text-gray-900 dark:text-gray-100"
+            className="hover:text-primary-500 dark:hover:text-primary-400 text-lg font-medium text-gray-900 dark:text-gray-100 font-satoshi"
           >
             FactLink
           </a>
@@ -52,7 +52,7 @@ const Header = () => {
               <Link
                 key={link.title}
                 href={link.href}
-                className="hover:text-primary-500 dark:hover:text-primary-400 m-1 font-sans font-medium text-gray-900 dark:text-gray-100"
+                className="hover:text-primary-500 dark:hover:text-primary-400 m-1 font-medium text-gray-900 dark:text-gray-100 font-sans"
               >
                 {link.title}
               </Link>
@@ -86,6 +86,7 @@ const ThemeLogo = () => {
       alt="Factlink Logo"
       width={144}
       height={144}
+      
       priority
     />
   )
