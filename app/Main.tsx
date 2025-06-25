@@ -31,7 +31,7 @@ export default function Home({ posts }) {
   return (
     <>
       {/* Hero Section */}
-      <h2 className="text-gradient-factlink-custom mb-4 mt-20 text-left text-3xl font-bold tracking-tight md:text-4xl">
+      <h2 className="text-gradient-factlink-custom mt-20 mb-4 text-left text-3xl font-bold tracking-tight md:text-4xl">
         MOST RECENT ARTICLES
       </h2>
       {/* Horizontal line above Most Recent Articles Section */}
@@ -96,15 +96,15 @@ export default function Home({ posts }) {
             return (
               <li key={slug} className="">
                 <Link href={`/${slug}`} className="group block">
-                  <div className="flex flex-col md:flex-row items-stretch overflow-hidden rounded-2xl border-2 border-gray-200/60 bg-white p-0 shadow-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl dark:border-gray-800 dark:bg-gray-900">
+                  <div className="flex flex-col items-stretch overflow-hidden rounded-2xl border-2 border-gray-200/60 bg-white p-0 shadow-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl md:flex-row dark:border-gray-800 dark:bg-gray-900">
                     {/* Image Side */}
-                    <div className="w-full md:w-1/3 flex-shrink-0 flex items-center justify-center overflow-hidden rounded-t-xl md:rounded-l-xl md:rounded-tr-none p-0 md:ml-6">
+                    <div className="flex w-full flex-shrink-0 items-center justify-center overflow-hidden rounded-t-xl p-0 md:ml-6 md:w-1/3 md:rounded-l-xl md:rounded-tr-none">
                       <Image
                         src={images?.[0] || '/static/images/topic.png'}
                         alt={title}
                         width={320}
                         height={180}
-                        className="w-full h-[180px] object-cover object-center transition-transform duration-300 group-hover:scale-105 md:h-[180px] md:min-h-[180px]"
+                        className="h-[180px] w-full object-cover object-center transition-transform duration-300 group-hover:scale-105 md:h-[180px] md:min-h-[180px]"
                         priority={false}
                       />
                     </div>
@@ -205,7 +205,7 @@ export default function Home({ posts }) {
         <div className="mx-auto mt-8 flex w-full max-w-xs flex-col items-stretch justify-center gap-2 sm:max-w-none sm:flex-row sm:items-center">
           <label
             htmlFor="pageSize"
-            className="mb-2 text-lg font-bold sm:mr-2 sm:mb-0 text-black dark:text-white"
+            className="mb-2 text-lg font-bold text-black sm:mr-2 sm:mb-0 dark:text-white"
           >
             Blogs per page:
           </label>
@@ -240,13 +240,12 @@ export default function Home({ posts }) {
         </div>
       </section>
 
-     
       <div className="mt-8 mb-16 flex justify-center">
         <BackToTopButton />
       </div>
 
       {/* Newsletter Subscribe Modal Trigger */}
-      <div className="fixed bottom-8 right-8 z-50">
+      <div className="fixed right-8 bottom-8 z-50">
         <button
           onClick={() => setShowNewsletterModal(true)}
           className="rounded-lg bg-pink-600 px-6 py-3 text-lg font-bold text-white shadow-lg transition-colors hover:bg-pink-700 focus:ring-2 focus:ring-pink-300 focus:outline-none"
@@ -259,7 +258,7 @@ export default function Home({ posts }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
           <div className="relative w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl dark:bg-gray-900">
             <button
-              className="absolute right-4 top-4 text-2xl text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+              className="absolute top-4 right-4 text-2xl text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
               onClick={() => setShowNewsletterModal(false)}
               aria-label="Close"
             >
