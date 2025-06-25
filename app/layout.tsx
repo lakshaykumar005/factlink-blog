@@ -79,6 +79,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           content="Insights, updates, and research on Factlink, Polymarket, and blockchain technology."
         />
         <meta name="twitter:url" content="https://factlink-blog.vercel.app" />
+        <meta
+          name="telegram:channel"
+          content="https://factlink-blog.vercel.app/static/images/factlinkproject.png"
+        />
+        <meta
+          name="discord:image"
+          content="https://factlink-blog.vercel.app/static/images/factlinkproject.png"
+        />
       </head>
       <link rel="apple-touch-icon" sizes="76x76" href="/static/images/favicon.ico" />
       <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon.ico" />
