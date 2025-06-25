@@ -124,13 +124,13 @@ export default function Home({ posts }) {
                       </span>
                     </div>
                     {/* Image Side */}
-                    <div className="flex w-full flex-shrink-0 items-center justify-center overflow-hidden rounded-t-xl md:w-1/3 md:-translate-x-6">
+                    <div className="m-0 flex w-full flex-shrink-0 items-center justify-center overflow-hidden rounded-t-xl p-0 md:w-1/3 md:-translate-x-6">
                       <Image
                         src={images?.[0] || '/static/images/topic.png'}
                         alt={title}
                         width={320}
                         height={180}
-                        className="h-[160px] w-full object-cover object-center transition-transform duration-300 group-hover:scale-105 sm:h-[180px] md:h-[180px] md:min-h-[180px]"
+                        className="h-[160px] w-full rounded-t-xl rounded-b-none object-cover object-center transition-transform duration-300 group-hover:scale-105 sm:h-[180px] md:h-[180px] md:min-h-[180px]"
                         priority={false}
                       />
                     </div>
@@ -202,11 +202,14 @@ export default function Home({ posts }) {
           </div>
         )}
         {/* Blogs per page dropdown moved to bottom */}
-        <div className="mt-8 flex items-center justify-center gap-2">
-          <label htmlFor="pageSize" className="text-gradient-factlink-custom text-lg font-bold">
+        <div className="mx-auto mt-8 flex w-full max-w-xs flex-col items-stretch justify-center gap-2 sm:max-w-none sm:flex-row sm:items-center">
+          <label
+            htmlFor="pageSize"
+            className="text-gradient-factlink-custom mb-2 text-lg font-bold sm:mr-2 sm:mb-0"
+          >
             Blogs per page:
           </label>
-          <div className="relative">
+          <div className="relative w-full sm:w-auto">
             <select
               id="pageSize"
               value={pageSize}
@@ -214,7 +217,7 @@ export default function Home({ posts }) {
                 setPageSize(Number(e.target.value))
                 setPage(1)
               }}
-              className="appearance-none rounded-full border border-pink-400 bg-white/80 px-6 py-2 pr-10 text-base font-semibold text-pink-600 shadow transition-colors focus:border-pink-600 focus:ring-2 focus:ring-pink-200 dark:bg-gray-900/80 dark:text-pink-300"
+              className="w-full appearance-none rounded-full border border-pink-400 bg-white/80 px-6 py-2 pr-10 text-base font-semibold text-pink-600 shadow transition-colors focus:border-pink-600 focus:ring-2 focus:ring-pink-200 sm:w-auto dark:bg-gray-900/80 dark:text-pink-300"
             >
               {[5, 10, 20, 50].map((size) => (
                 <option key={size} value={size}>
