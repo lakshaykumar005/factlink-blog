@@ -11,27 +11,50 @@ import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteMetadata.siteUrl),
+  metadataBase: new URL('https://factlink-blog.vercel.app'),
   title: {
-    default: siteMetadata.title,
-    template: `%s | ${siteMetadata.title}`,
+    default: 'Factlink - Decentralized Optimistic Oracle for Solana',
+    template: `%s | Factlink`,
   },
-  description: siteMetadata.description,
+  description: 'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.',
+  
+  // Open Graph - Using Vercel's image optimization
   openGraph: {
-    title: siteMetadata.title,
-    description: siteMetadata.description,
-    url: 'https://factlink-blog.vercel.app',
-    siteName: siteMetadata.title,
-    images: [`${siteMetadata.siteUrl}/static/images/factlinkproject.png`],
-    locale: 'en_US',
     type: 'website',
+    locale: 'en_US',
+    url: 'https://factlink-blog.vercel.app',
+    title: 'Factlink - Decentralized Optimistic Oracle for Solana',
+    description: 'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.',
+    siteName: 'Factlink',
+    images: [
+      {
+        // Using Vercel's built-in image optimization to resize your 1024x1024 to 1200x630
+        url: 'https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75',
+        width: 1200,
+        height: 630,
+        alt: 'Factlink - Decentralized Optimistic Oracle for Solana',
+      },
+    ],
   },
+  
+  // Twitter
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Factlink - Decentralized Optimistic Oracle for Solana',
+    description: 'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.',
+    site: '@factlinkoracle',
+    creator: '@factlinkoracle',
+    images: ['https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75'],
+  },
+  
+  // Additional metadata
   alternates: {
-    canonical: './',
+    canonical: 'https://factlink-blog.vercel.app',
     types: {
-      'application/rss+xml': `${siteMetadata.siteUrl}/feed.xml`,
+      'application/rss+xml': 'https://factlink-blog.vercel.app/feed.xml',
     },
   },
+  
   robots: {
     index: true,
     follow: true,
@@ -43,10 +66,17 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  twitter: {
-    title: siteMetadata.title,
-    card: 'summary_large_image',
-    images: [`${siteMetadata.siteUrl}/static/images/factlinkproject.png`],
+  
+  // Additional meta tags
+  other: {
+    // WhatsApp specific (though it uses Open Graph)
+    'og:image:width': '1200',
+    'og:image:height': '630',
+    'og:image:type': 'image/png',
+    // Telegram
+    'telegram:image': 'https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75',
+    // Discord
+    'discord:image': 'https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75',
   },
 }
 
@@ -54,31 +84,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const basePath = process.env.BASE_PATH || ''
 
   return (
-    <html lang={siteMetadata.language} className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* Telegram */}
-        <meta
-          name="telegram:image"
-          content="https://factlink-blog.vercel.app/static/images/factlinkproject.png"
-        />
-        {/* Discord */}
-        <meta
-          name="discord:image"
-          content="https://factlink-blog.vercel.app/static/images/factlinkproject.png"
-        />
-        {/* Instagram (uses Open Graph) */}
-        {/* Pinterest (uses Open Graph) */}
+        {/* Favicons */}
+        <link rel="apple-touch-icon" sizes="76x76" href="/static/images/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon.ico" />
+        <link rel="manifest" href="/static/favicons/site.webmanifest" />
+        <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
+        <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
       </head>
-      <link rel="apple-touch-icon" sizes="76x76" href="/static/images/favicon.ico" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon.ico" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon.ico" />
-      <link rel="manifest" href="/static/favicons/site.webmanifest" />
-      <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
-      <meta name="msapplication-TileColor" content="#000000" />
-      <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
-      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
-      <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
-      <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico" />
       <body className="bg-gradient-to-br from-gray-50 via-blue-50 to-teal-100 pl-[calc(100vw-100%)] text-black antialiased dark:bg-black dark:text-white">
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
