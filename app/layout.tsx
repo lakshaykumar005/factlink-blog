@@ -56,34 +56,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang={siteMetadata.language} className="scroll-smooth" suppressHydrationWarning>
       <head>
-        {/* Open Graph / Facebook / WhatsApp / LinkedIn */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Factlink & Polymarket Blog" />
-        <meta
-          property="og:description"
-          content="Insights, updates, and research on Factlink, Polymarket, and blockchain technology."
-        />
-        <meta property="og:url" content="https://factlink-blog.vercel.app" />
-        <meta
-          property="og:image"
-          content="https://factlink-blog.vercel.app/static/images/factlinkproject.png"
-        />
-        <meta property="og:image:alt" content="Factlink Project" />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Factlink & Polymarket Blog" />
-        <meta
-          name="twitter:description"
-          content="Insights, updates, and research on Factlink, Polymarket, and blockchain technology."
-        />
-        <meta name="twitter:url" content="https://factlink-blog.vercel.app" />
-        <meta
-          name="twitter:image"
-          content="https://factlink-blog.vercel.app/static/images/factlinkproject.png"
-        />
         {/* Telegram */}
         <meta
           name="telegram:image"
