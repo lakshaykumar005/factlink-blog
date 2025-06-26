@@ -1,15 +1,19 @@
 // app/[...slug]/layout.tsx
 import { Metadata } from 'next'
 import { allBlogs } from 'contentlayer/generated'
-import { notFound } from 'next/navigation'
 
 interface BlogLayoutProps {
   children: React.ReactNode
-  params: { slug: string[] }
+  params: Promise<{ slug: string[] }>
 }
 
-export async function generateMetadata({ params }: { params: { slug: string[] } }): Promise<Metadata> {
-  const slug = params.slug.join('/')
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>
+}): Promise<Metadata> {
+  const resolvedParams = await params
+  const slug = resolvedParams.slug.join('/')
   const post = allBlogs.find((p) => p.slug === slug)
 
   if (!post) {
@@ -29,7 +33,9 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
   return {
     title: post.title,
     description: post.summary || 'Read this blog post on Factlink',
-    authors: post.authors ? post.authors.map((author) => ({ name: author })) : [{ name: 'Factlink Team' }],
+    authors: post.authors
+      ? post.authors.map((author) => ({ name: author }))
+      : [{ name: 'Factlink Team' }],
     openGraph: {
       title: post.title,
       description: post.summary || 'Read this blog post on Factlink',
@@ -54,6 +60,8 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
   }
 }
 
-export default function BlogLayout({ children }: BlogLayoutProps) {
+export default async function BlogLayout({ children, params }: BlogLayoutProps) {
+  // We don't actually need to use params in the layout component
+  // but keeping it for consistency with the interface
   return <>{children}</>
 }

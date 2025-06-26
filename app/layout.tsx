@@ -1,3 +1,4 @@
+// app/layout.tsx
 import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 import 'remark-github-blockquote-alert/alert.css'
@@ -10,6 +11,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 
+// Base metadata for the root layout
 export const metadata: Metadata = {
   metadataBase: new URL('https://factlink-blog.vercel.app'),
   title: {
@@ -19,7 +21,7 @@ export const metadata: Metadata = {
   description:
     'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.',
 
-  // Open Graph - Using Vercel's image optimization
+  // Default Open Graph
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -30,8 +32,7 @@ export const metadata: Metadata = {
     siteName: 'Factlink',
     images: [
       {
-        // Using Vercel's built-in image optimization to resize your 1024x1024 to 1200x630
-        url: 'https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75',
+        url: '/api/og',
         width: 1200,
         height: 630,
         alt: 'Factlink - Decentralized Optimistic Oracle for Solana',
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
     ],
   },
 
-  // Twitter
+  // Default Twitter
   twitter: {
     card: 'summary_large_image',
     title: 'Factlink - Decentralized Optimistic Oracle for Solana',
@@ -47,17 +48,7 @@ export const metadata: Metadata = {
       'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.',
     site: '@factlinkoracle',
     creator: '@factlinkoracle',
-    images: [
-      'https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75',
-    ],
-  },
-
-  // Additional metadata
-  alternates: {
-    canonical: 'https://factlink-blog.vercel.app',
-    types: {
-      'application/rss+xml': 'https://factlink-blog.vercel.app/feed.xml',
-    },
+    images: ['/api/og'],
   },
 
   robots: {
@@ -72,18 +63,11 @@ export const metadata: Metadata = {
     },
   },
 
-  // Additional meta tags
-  other: {
-    // WhatsApp specific (though it uses Open Graph)
-    'og:image:width': '1200',
-    'og:image:height': '630',
-    'og:image:type': 'image/png',
-    // Telegram
-    'telegram:image':
-      'https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75',
-    // Discord
-    'discord:image':
-      'https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75',
+  alternates: {
+    canonical: 'https://factlink-blog.vercel.app',
+    types: {
+      'application/rss+xml': 'https://factlink-blog.vercel.app/feed.xml',
+    },
   },
 }
 

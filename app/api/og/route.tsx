@@ -4,27 +4,27 @@ import { NextRequest } from 'next/server'
 
 export const runtime = 'edge'
 
-const interRegular = fetch(
-  new URL('../../../public/static/fonts/Inter-Regular.ttf', import.meta.url)
+const satoshiRegular = fetch(
+  new URL('../../../public/static/fonts/Satoshi-Regular.woff2', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
-const interBold = fetch(
-  new URL('../../../public/static/fonts/Inter-Bold.ttf', import.meta.url)
+const satoshiBold = fetch(
+  new URL('../../../public/static/fonts/Satoshi-Bold.woff2', import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    
+
     // Get parameters from URL
-    const title = searchParams.get('title') || 'Factlink - Decentralized Optimistic Oracle for Solana'
-    const summary = searchParams.get('summary') || 'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.'
+    const title =
+      searchParams.get('title') || 'Factlink - Decentralized Optimistic Oracle for Solana'
+    const summary =
+      searchParams.get('summary') ||
+      'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.'
     const customImage = searchParams.get('image')
 
-    const [interRegularFont, interBoldFont] = await Promise.all([
-      interRegular,
-      interBold,
-    ])
+    const [satoshiRegularFont, satoshiBoldFont] = await Promise.all([satoshiRegular, satoshiBold])
 
     return new ImageResponse(
       (
@@ -48,11 +48,12 @@ export async function GET(request: NextRequest) {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundImage: 'radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.1) 2px, transparent 0)',
+              backgroundImage:
+                'radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.1) 2px, transparent 0)',
               backgroundSize: '50px 50px',
             }}
           />
-          
+
           {/* Main Content Container */}
           <div
             style={{
@@ -96,7 +97,7 @@ export async function GET(request: NextRequest) {
                   fontSize: '32px',
                   fontWeight: 'bold',
                   color: 'white',
-                  fontFamily: 'Inter',
+                  fontFamily: 'Satoshi',
                 }}
               >
                 Factlink
@@ -117,7 +118,7 @@ export async function GET(request: NextRequest) {
               >
                 <img
                   src={customImage}
-                  alt="Blog post image"
+                  alt="Blog post"
                   style={{
                     width: '100%',
                     height: '100%',
@@ -136,7 +137,7 @@ export async function GET(request: NextRequest) {
                 textAlign: 'center',
                 lineHeight: '1.2',
                 marginBottom: '20px',
-                fontFamily: 'Inter',
+                fontFamily: 'Satoshi',
                 maxWidth: '900px',
               }}
             >
@@ -150,7 +151,7 @@ export async function GET(request: NextRequest) {
                 color: 'rgba(255, 255, 255, 0.8)',
                 textAlign: 'center',
                 lineHeight: '1.4',
-                fontFamily: 'Inter',
+                fontFamily: 'Satoshi',
                 maxWidth: '800px',
                 margin: '0 auto',
               }}
@@ -174,7 +175,7 @@ export async function GET(request: NextRequest) {
                 style={{
                   fontSize: '18px',
                   color: '#3b82f6',
-                  fontFamily: 'Inter',
+                  fontFamily: 'Satoshi',
                   fontWeight: '600',
                 }}
               >
@@ -189,22 +190,34 @@ export async function GET(request: NextRequest) {
         height: 630,
         fonts: [
           {
-            name: 'Inter',
-            data: interRegularFont,
+            name: 'Satoshi',
+            data: satoshiRegularFont,
             style: 'normal',
             weight: 400,
           },
           {
-            name: 'Inter',
-            data: interBoldFont,
+            name: 'Satoshi',
+            data: satoshiBoldFont,
             style: 'normal',
             weight: 700,
           },
         ],
       }
     )
-  } catch (e: any) {
-    console.log(`${e.message}`)
+  } catch (e: unknown) {
+    let message = 'Unknown error'
+    function hasMessage(obj: unknown): obj is { message: string } {
+      return (
+        typeof obj === 'object' &&
+        obj !== null &&
+        'message' in obj &&
+        typeof (obj as { message: unknown }).message === 'string'
+      )
+    }
+    if (hasMessage(e)) {
+      message = e.message
+    }
+    console.log(message)
     return new Response(`Failed to generate the image`, {
       status: 500,
     })
