@@ -16,15 +16,17 @@ export const metadata: Metadata = {
     default: 'Factlink - Decentralized Optimistic Oracle for Solana',
     template: `%s | Factlink`,
   },
-  description: 'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.',
-  
+  description:
+    'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.',
+
   // Open Graph - Using Vercel's image optimization
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://factlink-blog.vercel.app',
     title: 'Factlink - Decentralized Optimistic Oracle for Solana',
-    description: 'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.',
+    description:
+      'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.',
     siteName: 'Factlink',
     images: [
       {
@@ -36,17 +38,20 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
+
   // Twitter
   twitter: {
     card: 'summary_large_image',
     title: 'Factlink - Decentralized Optimistic Oracle for Solana',
-    description: 'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.',
+    description:
+      'Factlink is an optimistic oracle that trustlessly records any verifiable data on the Solana blockchain.',
     site: '@factlinkoracle',
     creator: '@factlinkoracle',
-    images: ['https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75'],
+    images: [
+      'https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75',
+    ],
   },
-  
+
   // Additional metadata
   alternates: {
     canonical: 'https://factlink-blog.vercel.app',
@@ -54,7 +59,7 @@ export const metadata: Metadata = {
       'application/rss+xml': 'https://factlink-blog.vercel.app/feed.xml',
     },
   },
-  
+
   robots: {
     index: true,
     follow: true,
@@ -66,7 +71,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  
+
   // Additional meta tags
   other: {
     // WhatsApp specific (though it uses Open Graph)
@@ -74,9 +79,11 @@ export const metadata: Metadata = {
     'og:image:height': '630',
     'og:image:type': 'image/png',
     // Telegram
-    'telegram:image': 'https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75',
+    'telegram:image':
+      'https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75',
     // Discord
-    'discord:image': 'https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75',
+    'discord:image':
+      'https://factlink-blog.vercel.app/_next/image?url=%2Fstatic%2Fimages%2Ffactlinkproject.png&w=1200&h=630&q=75',
   },
 }
 
