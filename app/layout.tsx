@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteMetadata.title,
     description: siteMetadata.description,
-    url: './',
+    url: 'https://factlink-blog.vercel.app',
     siteName: siteMetadata.title,
     images: [`${siteMetadata.siteUrl}/static/images/factlinkproject.png`],
     locale: 'en_US',
