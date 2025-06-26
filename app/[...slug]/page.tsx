@@ -42,12 +42,16 @@ export async function generateMetadata(props: {
   let imageList = [siteMetadata.socialBanner]
   if (post.images && post.images.length > 0) {
     imageList = (typeof post.images === 'string' ? [post.images] : post.images).map((img) =>
-      img && img.startsWith('http') ? img : siteMetadata.siteUrl + img
+      img && img.startsWith('http')
+        ? img
+        : `${siteMetadata.siteUrl}/_next/image?url=${encodeURIComponent(img)}&w=1200&h=630&q=75`
     )
   } else {
-    imageList = [siteMetadata.siteUrl + siteMetadata.socialBanner]
+    imageList = [
+      `${siteMetadata.siteUrl}/_next/image?url=${encodeURIComponent(siteMetadata.socialBanner)}&w=1200&h=630&q=75`,
+    ]
   }
-  const ogImages = imageList.map((img) => ({ url: img }))
+  const ogImages = imageList.map((img) => ({ url: img, width: 1200, height: 630, alt: post.title }))
 
   return {
     title: post.title,
